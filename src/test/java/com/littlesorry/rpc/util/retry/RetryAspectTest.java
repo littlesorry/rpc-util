@@ -34,7 +34,7 @@ public class RetryAspectTest {
     }
 
     @Test
-    public void testAroundRetry() throws Exception {
+    public void test() throws Exception {
         doReturn(1).when(generator).next();
 
         assertEquals(1, aspectTestBean.test().intValue());
@@ -44,7 +44,7 @@ public class RetryAspectTest {
     }
 
     @Test
-    public void testAroundRetry_1retry() throws Exception {
+    public void test_1retry() throws Exception {
         doAnswer(new Answer() {
             int i = 0;
 
@@ -62,7 +62,7 @@ public class RetryAspectTest {
     }
 
     @Test
-    public void testAroundRetry_2retry() throws Exception {
+    public void test_2retry() throws Exception {
         doAnswer(new Answer() {
             int i = 0;
 
@@ -80,7 +80,7 @@ public class RetryAspectTest {
     }
 
     @Test
-    public void testAroundRetry_3retry_fail() throws Exception {
+    public void test_3retry_fail() throws Exception {
         doThrow(new RuntimeException("3 time fail")).when(generator).next();
 
         try {
@@ -89,6 +89,20 @@ public class RetryAspectTest {
         } catch (RuntimeException e) {
             assertEquals("3 time fail", e.getMessage());
             verify(generator, times(3)).next();
+            verifyNoMoreInteractions(generator);
+        }
+    }
+
+    @Test
+    public void test_fullConfig_times() {
+        doThrow(new RuntimeException("3 time fail")).when(generator).next();
+
+        try {
+            aspectTestBean.test2();
+            Assert.fail();
+        } catch (Exception e) {
+            assertEquals("3 time fail", e.getMessage());
+            verify(generator, times(2)).next();
             verifyNoMoreInteractions(generator);
         }
     }

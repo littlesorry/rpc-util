@@ -12,14 +12,14 @@ Sample:
 // fully config example
 @Retry(
     value = 3 // method level max retry time config
-    , stopOn = {NullPointException.class} // exception to exit invoking
+    , breakOn = {NullPointException.class} // exception to exit invoking
     , continueOn = {InvalidClassException.class} // exception to continue retry
 )
 public void call() {
 
 }
 
-// simple one (which will use source level max retry time with no @code{stopOn} and no @code{continueOn}):
+// simple one (which will use source level max retry time with no @code{breakOn} and no @code{continueOn}):
 @Retry
 public void call2() {
 

@@ -14,7 +14,7 @@ public @interface Retry {
 
     int value() default -1;
 
-    Class<? extends Throwable>[] stopOn() default {};
+    Class<? extends Throwable>[] breakOn() default {};
 
     Class<? extends Throwable>[] continueOn() default {};
 

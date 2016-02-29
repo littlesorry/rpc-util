@@ -12,7 +12,10 @@ public class AspectTestBean {
         return intGenerator.next();
     }
 
-    @Retry
+    @Retry(
+            value = 2
+            , breakOn = {IllegalArgumentException.class, ClassNotFoundException.class}
+    )
     public void test2() throws Exception {
         intGenerator.next();
     }

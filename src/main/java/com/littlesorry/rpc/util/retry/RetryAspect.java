@@ -31,7 +31,7 @@ public class RetryAspect {
                     continue;
                 }
 
-                if (new HashSet<Class>(asList(retry.stopOn())).contains(e.getClass())
+                if (new HashSet<Class>(asList(retry.breakOn())).contains(e.getClass())
                         || (retry.continueOn().length > 0)
                         || i >= times - 1) {
                     throw e;
