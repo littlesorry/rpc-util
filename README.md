@@ -14,6 +14,9 @@ Sample:
     value = 3 // method level max retry time config
     , breakOn = {NullPointException.class} // exception to exit invoking
     , continueOn = {InvalidClassException.class} // exception to continue retry
+                                                 // , if this is configured
+                                                 // , only matching exception will continue retry process
+                                                 // , otherwise retry process will exit
 )
 public void call() {
 
