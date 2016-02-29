@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       ">
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="retryAspect" class="com.littlesorry.rpc.util.retry.RetryAspect">
+      <property name="defaultRetryTimes" value="3" />
+    </bean>
+
+    <bean id="intGenerator" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.littlesorry.rpc.util.retry.IntGenerator"/>
+    </bean>
+
+    <bean id="aspectTestBean" class="com.littlesorry.rpc.util.retry.AspectTestBean">
+        <property name="intGenerator" ref="intGenerator" />
+    </bean>
+
+</beans>
