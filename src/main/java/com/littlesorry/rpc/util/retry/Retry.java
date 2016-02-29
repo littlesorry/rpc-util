@@ -12,10 +12,22 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Retry {
 
+    /**
+     * method level max retry time config
+     */
     int value() default -1;
 
+    /**
+     * exception to exit invoking
+     */
     Class<? extends Throwable>[] breakOn() default {};
 
+    /**
+     * exception to continue retry
+     * , if this is configured
+     * , only matching exception will continue retry process
+     * , otherwise retry process will exit     * @return
+     */
     Class<? extends Throwable>[] continueOn() default {};
 
 }
