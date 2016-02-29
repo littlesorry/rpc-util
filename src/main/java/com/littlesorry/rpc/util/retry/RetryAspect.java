@@ -4,8 +4,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-import java.util.HashSet;
-
 import static java.util.Arrays.asList;
 
 /**
@@ -27,11 +25,11 @@ public class RetryAspect {
             try {
                 return pjp.proceed();
             } catch (Throwable e) {
-                if (new HashSet<Class>(asList(retry.continueOn())).contains(e.getClass())) {
+                if (asList(retry.continueOn()).contains(e.getClass())) {
                     continue;
                 }
 
-                if (new HashSet<Class>(asList(retry.breakOn())).contains(e.getClass())
+                if (asList(retry.breakOn()).contains(e.getClass())
                         || (retry.continueOn().length > 0)
                         || i >= times - 1) {
                     throw e;
