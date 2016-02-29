@@ -1,5 +1,9 @@
 # rpc-util
 
+Some method invoking util method, especially for rpc call.
+
+## Retry
+
 Annotation based java method retry util, especially for rpc call.
 
 Sample:
