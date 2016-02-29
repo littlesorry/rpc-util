@@ -23,6 +23,5 @@ Enabled apect proxy by:
 <bean id="retryAspect" class="com.littlesorry.rpc.util.retry.RetryAspect">
   <property name="defaultRetryTimes" value="3" /> <!-- source level max retry time config -->
 </bean>
-
 ```
 
