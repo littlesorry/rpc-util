@@ -20,6 +20,7 @@ public void call() {
 }
 
 // simple one (which will use source level max retry time with no @code{stopOn} and @code{continueOn}):
+@Retry
 public void call2() {
 
 }
