@@ -6,7 +6,6 @@ import org.aspectj.lang.annotation.Aspect;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
@@ -59,16 +58,13 @@ public class RetryAspect {
     }
 
     private LoopPolicy getPolicy(Retry retry) {
-        policies.computeIfAbsent(retry.loopPolicy(), new Function<Class<? extends LoopPolicy>, LoopPolicy>() {
-            @Override
-            public LoopPolicy apply(Class<? extends LoopPolicy> aClass) {
-                LoopPolicy policy = null;
-                try {
-                    policy = aClass.newInstance();
-                } catch (Throwable e) {
-                }
-                return policy;
+        policies.computeIfAbsent(retry.loopPolicy(), aClass -> {
+            LoopPolicy policy = null;
+            try {
+                policy = aClass.newInstance();
+            } catch (Throwable e) {
             }
+            return policy;
         });
 
         return policies.get(retry.loopPolicy());
