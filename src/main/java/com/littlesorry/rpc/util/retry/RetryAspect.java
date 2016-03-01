@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 @Aspect
 public class RetryAspect {
 
-    private Integer defaultRetryTimes;
+    private Integer defaultRetryTimes = 3;
 
     @Around("@annotation(retry)")
     public Object aroundRetry(ProceedingJoinPoint pjp, Retry retry) throws Throwable {
