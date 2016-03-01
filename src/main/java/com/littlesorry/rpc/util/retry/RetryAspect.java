@@ -36,7 +36,8 @@ public class RetryAspect {
                         continue;
                     }
 
-                    if (policy.shouldBreak(e, i, times)) {
+                    if (policy.shouldBreak(e, i, times)
+                            || i >= times - 1) {
                         break;
                     }
                 } else {
