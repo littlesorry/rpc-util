@@ -30,4 +30,9 @@ public @interface Retry {
      */
     Class<? extends Throwable>[] continueOn() default {};
 
+
+    /**
+     * interface to provide more precise logic flow control
+     */
+    Class<? extends LoopPolicy> loopPolicy() default LoopPolicy.NONE_POLICY.class;
 }
